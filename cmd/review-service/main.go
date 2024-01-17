@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"review-service/internal/conf"
+	"review-service/pkg/snowflake"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
@@ -80,6 +81,11 @@ func main() {
 	}
 	defer cleanup()
 
+	// init snowflake
+	err = snowflake.Init(bc.Snowflake.StartTime, bc.Snowflake.MachineId)
+	if err != nil {
+		panic(err)
+	}
 	// start and wait for stop signal
 	if err := app.Run(); err != nil {
 		panic(err)

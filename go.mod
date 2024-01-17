@@ -3,6 +3,7 @@ module review-service
 go 1.19
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/go-kratos/kratos/v2 v2.7.0
 	github.com/google/wire v0.5.0
 	go.uber.org/automaxprocs v1.5.1
@@ -12,6 +13,7 @@ require (
 	gorm.io/driver/mysql v1.5.2
 	gorm.io/gen v0.3.25
 	gorm.io/gorm v1.25.5
+	gorm.io/plugin/dbresolver v1.5.0
 )
 
 require (
@@ -42,5 +44,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/datatypes v1.1.1-0.20230130040222-c43177d3cf8c // indirect
 	gorm.io/hints v1.1.0 // indirect
-	gorm.io/plugin/dbresolver v1.5.0 // indirect
 )

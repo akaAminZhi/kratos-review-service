@@ -20,8 +20,20 @@ func NewReviewService(uc *biz.ReviewUsecase) *ReviewService {
 
 func (s *ReviewService) CreateReview(ctx context.Context, req *pb.CreateReviewRequest) (*pb.CreateReviewReply, error) {
 	fmt.Printf("service CreateReview req:%#v\n", req)
+	var anonymous int32 = 0
+	if req.Anonymous {
+		anonymous = 1
+	}
 	review := model.ReviewInfo{
-		UserID: 12,
+		UserID:       req.OrderID,
+		OrderID:      req.OrderID,
+		Score:        req.Score,
+		ExpressScore: req.ExpressScore,
+		Content:      req.Content,
+		PicInfo:      req.PicInfo,
+		VideoInfo:    req.VideoInfo,
+		Anonymous:    anonymous,
+		Status:       0,
 	}
 	rsp, err := s.uc.CreateReview(ctx, &review)
 
