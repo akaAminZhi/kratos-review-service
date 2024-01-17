@@ -2,20 +2,30 @@ package service
 
 import (
 	"context"
+	"fmt"
 
 	pb "review-service/api/review/v1"
+	"review-service/internal/biz"
+	"review-service/internal/data/model"
 )
 
 type ReviewService struct {
 	pb.UnimplementedReviewServer
+	uc *biz.ReviewUsecase
 }
 
-func NewReviewService() *ReviewService {
-	return &ReviewService{}
+func NewReviewService(uc *biz.ReviewUsecase) *ReviewService {
+	return &ReviewService{uc: uc}
 }
 
 func (s *ReviewService) CreateReview(ctx context.Context, req *pb.CreateReviewRequest) (*pb.CreateReviewReply, error) {
-	return &pb.CreateReviewReply{}, nil
+	fmt.Printf("service CreateReview req:%#v\n", req)
+	review := model.ReviewInfo{
+		UserID: 12,
+	}
+	rsp, err := s.uc.CreateReview(ctx, &review)
+
+	return &pb.CreateReviewReply{ReviewID: rsp.ReviewID}, err
 }
 func (s *ReviewService) UpdateReview(ctx context.Context, req *pb.UpdateReviewRequest) (*pb.UpdateReviewReply, error) {
 	return &pb.UpdateReviewReply{}, nil
